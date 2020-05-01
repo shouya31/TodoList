@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>TODOリスト</h1>
+    <input type="radio" checked> すべて
+    <input type="radio"> 作業中
+    <input type="radio"> 完了
 
-</body>
+    <div>
+      <tr>
+        <th><b>ID</b> </th>
+        <th><b>コメント</b></th>
+        <th><b>状態</b></th>
+      </tr>
+      <table id="lists">
+      </table>
+    </div>
+
+    <div>
+      <h3>新規タスクの追加</h3>
+      <input type="text" id="input-task">
+      <button id="adding-task">追加</button>
+    </div>
+    <script src="index.js"></script>
+  </body>
 </html>
