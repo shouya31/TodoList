@@ -5,14 +5,21 @@ const todos = []
 
 // 表示させるタスクのHTML要素を作成する関数
 const addHTML = (todo, i) => {
-  const html =`
-          <p>${i}　${todo.task}</p>
-          <td><button>${todo.status}</button></td>
-          <td><button>削除</button></td>
-        `
   const tr = document.createElement("tr")
-  tr.innerHTML = html
-  lists.append(tr)
+  const td1 = document.createElement("td")
+  const td2 = document.createElement("td")
+  const button1 = document.createElement("button")
+  const button2 = document.createElement("button")
+  const p = document.createElement("p")
+  tr.appendChild(p)
+  tr.appendChild(td1)
+  tr.appendChild(td2)
+  td1.appendChild(button1)
+  td2.appendChild(button2)
+  p.innerHTML = `${i}　${todo.task}`
+  button1.innerHTML = `${todo.status}`
+  button2.innerHTML = "削除"
+  lists.appendChild(tr)
 }
 
 // 入力したタスクを表示させる関数
