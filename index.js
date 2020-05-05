@@ -20,6 +20,7 @@ const addHTML = (todo, i) => {
   tdComment.innerHTML = todo.task
   tdStatus.appendChild(statusButton)
   tdDelete.appendChild(deleteButton)
+  deleteButton.setAttribute("id", "delete_btn")
   statusButton.innerHTML = todo.status
   deleteButton.innerHTML = "削除"
   lists.appendChild(tr)
@@ -34,10 +35,42 @@ const addTask = () => {
   }
   todos.push(todo)
   lists.innerHTML = ""
-  todos.forEach((todo, i) => {
+  todos.forEach((todo,i) => {
     addHTML(todo, i)
   });
   input.value = ""
 }
 
+// 入力したタスクを削除する関数
+const deleteTask = () => {
+  deleteBtns = document.querySelectorAll("#delete_btn")
+  deleteBtns.forEach(btn => {
+    btn.addEventListener("click", function(){
+      btn.parentNode.parentNode.remove()
+      todos.pop(btn.parentNode.parentNode)
+      lists.innerHTML = ""
+      todos.forEach((todo,i) => {
+        addHTML(todo, i)
+      });
+    })
+  })
+}
+
+// 入力したタスクを削除するイベント
+lists.addEventListener('click', () => {
+  const deleteBtns = document.querySelectorAll("#delete_btn")
+  deleteBtns.forEach(btn => {
+    btn.addEventListener("click", function(){
+      const index = [].slice.call(deleteBtns).indexOf(btn)
+      btn.parentNode.parentNode.remove()
+      todos.splice(index, 1)
+      lists.innerHTML = ""
+      todos.forEach((todo, i) => {
+        addHTML(todo, i)
+      });
+    })
+  })
+})
+
+// 入力したタスクを表示する関数を呼び出すイベント
 addTaskButton.addEventListener('click', addTask)
