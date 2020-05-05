@@ -6,20 +6,20 @@ const todos = []
 // 表示させるタスクのHTML要素を作成する関数
 const addHTML = (todo, i) => {
   const tr = document.createElement("tr")
-  const td_id = document.createElement("td")
-  const td_comment = document.createElement("td")
-  const td_status = document.createElement("td")
-  const td_delete = document.createElement("td")
+  const tdId = document.createElement("td")
+  const tdComment = document.createElement("td")
+  const tdStatus = document.createElement("td")
+  const tdDelete = document.createElement("td")
   const statusButton = document.createElement("button")
   const deleteButton = document.createElement("button")
-  tr.appendChild(td_id)
-  tr.appendChild(td_comment)
-  tr.appendChild(td_status)
-  tr.appendChild(td_delete)
-  td_id.innerHTML = i + 1
-  td_comment.innerHTML = todo.task
-  td_status.appendChild(statusButton)
-  td_delete.appendChild(deleteButton)
+  tr.appendChild(tdId)
+  tr.appendChild(tdComment)
+  tr.appendChild(tdStatus)
+  tr.appendChild(tdDelete)
+  tdId.innerHTML = i + 1
+  tdComment.innerHTML = todo.task
+  tdStatus.appendChild(statusButton)
+  tdDelete.appendChild(deleteButton)
   statusButton.innerHTML = todo.status
   deleteButton.innerHTML = "削除"
   lists.appendChild(tr)
