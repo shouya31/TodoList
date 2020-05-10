@@ -35,6 +35,11 @@ const addHTML = (todo, i) => {
   deleteButton.addEventListener("click", function() {
     deleteTask(deleteButton, i)
   })
+
+  // 作業中orm完了ボタンを押した際に、ステータスを変更するchangeStatus関数を実行する
+  statusButton.addEventListener('click', function(){
+    changeStatus(statusButton, todo)
+  })
 }
 
 // 入力したタスクを表示させる関数
@@ -60,6 +65,17 @@ const deleteTask = (deleteButton, i) => {
     todos.forEach((todo, i) => {
       addHTML(todo, i)
   });
+}
+
+// タスクのステータスを変更する
+const changeStatus = (statusButton, todo) => {
+  if (todo.status == "作業中") {
+    todo.status = "完了"
+    statusButton.innerHTML = todo.status
+  }else{
+    todo.status = "作業中"
+    statusButton.innerHTML = todo.status
+  }
 }
 
 // 入力したタスクを表示する関数を呼び出すイベント
