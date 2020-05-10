@@ -5,6 +5,7 @@ const todos = []
 
 // 表示させるタスクのHTML要素を作成する関数
 const addHTML = (todo, i) => {
+  // 使用するHTML要素を生成する
   const tr = document.createElement("tr")
   const tdId = document.createElement("td")
   const tdComment = document.createElement("td")
@@ -12,18 +13,28 @@ const addHTML = (todo, i) => {
   const tdDelete = document.createElement("td")
   const statusButton = document.createElement("button")
   const deleteButton = document.createElement("button")
+
+  // tr要素を親要素とし、生成した要素らをappendする
   tr.appendChild(tdId)
   tr.appendChild(tdComment)
   tr.appendChild(tdStatus)
   tr.appendChild(tdDelete)
-  tdId.innerHTML = i + 1
-  tdComment.innerHTML = todo.task
   tdStatus.appendChild(statusButton)
   tdDelete.appendChild(deleteButton)
-  deleteButton.setAttribute("id", "delete_btn")
+
+  // tr要素をthred要素にappendする
+  lists.appendChild(tr)
+
+  // appendした要素に文字列の値を付与する
+  tdId.innerHTML = i + 1
+  tdComment.innerHTML = todo.task
   statusButton.innerHTML = todo.status
   deleteButton.innerHTML = "削除"
-  lists.appendChild(tr)
+
+  // 削除ボタンが押された際に、指定の要素を削除するdeleteTask関数を実行する
+  deleteButton.addEventListener("click", function() {
+    deleteTask(deleteButton, i)
+  })
 }
 
 // 入力したタスクを表示させる関数
@@ -42,35 +53,14 @@ const addTask = () => {
 }
 
 // 入力したタスクを削除する関数
-const deleteTask = () => {
-  deleteBtns = document.querySelectorAll("#delete_btn")
-  deleteBtns.forEach(btn => {
-    btn.addEventListener("click", function(){
-      btn.parentNode.parentNode.remove()
-      todos.pop(btn.parentNode.parentNode)
-      lists.innerHTML = ""
-      todos.forEach((todo,i) => {
-        addHTML(todo, i)
-      });
-    })
-  })
+const deleteTask = (deleteButton, i) => {
+  deleteButton.parentNode.parentNode.remove()
+    todos.splice(i, 1)
+    lists.innerHTML = ""
+    todos.forEach((todo, i) => {
+      addHTML(todo, i)
+  });
 }
-
-// 入力したタスクを削除するイベント
-lists.addEventListener('click', () => {
-  const deleteBtns = document.querySelectorAll("#delete_btn")
-  deleteBtns.forEach(btn => {
-    btn.addEventListener("click", function(){
-      const index = [].slice.call(deleteBtns).indexOf(btn)
-      btn.parentNode.parentNode.remove()
-      todos.splice(index, 1)
-      lists.innerHTML = ""
-      todos.forEach((todo, i) => {
-        addHTML(todo, i)
-      });
-    })
-  })
-})
 
 // 入力したタスクを表示する関数を呼び出すイベント
 addTaskButton.addEventListener('click', addTask)
