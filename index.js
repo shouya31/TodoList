@@ -3,6 +3,8 @@ const addTaskButton = document.getElementById("add-button")
 const lists = document.getElementById("lists")
 const todos = []
 
+let formValue = "all"
+
 // 表示させるタスクのHTML要素を作成する関数
 const addHTML = (todo, i) => {
   // 使用するHTML要素を生成する
@@ -21,7 +23,6 @@ const addHTML = (todo, i) => {
   tr.appendChild(tdDelete)
   tdStatus.appendChild(statusButton)
   tdDelete.appendChild(deleteButton)
-
   // tr要素をthred要素にappendする
   lists.appendChild(tr)
 
@@ -42,6 +43,39 @@ const addHTML = (todo, i) => {
   })
 }
 
+// 選択されているラジオフォームのバリューを取得する関数
+const judgeRadioValue = (value) => {
+  formValue = value
+}
+
+// 作業中のステータスをもつタスクのみを表示する関数
+const changeDoingTask = () => {
+  lists.innerHTML = ""
+  todos.forEach((todo, i) => {
+    if (todo.status === "作業中") {
+      addHTML(todo, i)
+    }
+  })
+}
+
+// 完了のステータスをもつタスクのみを表示する関数
+const changeDoneTask = () => {
+  lists.innerHTML = ""
+  todos.forEach((todo, i) => {
+    if (todo.status === "完了") {
+      addHTML(todo, i)
+    }
+  })
+}
+
+// ステータス関係なく、全てのタスクを表示する関数
+const changeAllTask = () => {
+  lists.innerHTML = ""
+  todos.forEach((todo, i) => {
+    addHTML(todo, i)
+  })
+}
+
 // 入力したタスクを表示させる関数
 const addTask = () => {
   const inputValue = input.value
@@ -50,20 +84,22 @@ const addTask = () => {
     status: "作業中"
   }
   todos.push(todo)
-  lists.innerHTML = ""
-  todos.forEach((todo,i) => {
-    addHTML(todo, i)
-  });
+  if (formValue === "all") {
+    lists.innerHTML = ""
+    todos.forEach((todo,i) => {
+      addHTML(todo, i)
+    });
+  }
   input.value = ""
 }
 
 // 入力したタスクを削除する関数
 const deleteTask = (deleteButton, i) => {
   deleteButton.parentNode.parentNode.remove()
-    todos.splice(i, 1)
-    lists.innerHTML = ""
-    todos.forEach((todo, i) => {
-      addHTML(todo, i)
+  todos.splice(i, 1)
+  lists.innerHTML = ""
+  todos.forEach((todo, i) => {
+    addHTML(todo, i)
   });
 }
 
