@@ -69,7 +69,7 @@ const deleteTask = (deleteButton, i) => {
 
 // タスクのステータスを変更する
 const changeStatus = (statusButton, todo) => {
-  if (todo.status == "作業中") {
+  if (todo.status === "作業中") {
     todo.status = "完了"
     statusButton.innerHTML = todo.status
   }else{
