@@ -84,7 +84,7 @@ const addTask = () => {
     status: "作業中"
   }
   todos.push(todo)
-  if (formValue === "all") {
+  if (formValue === "all" || formValue === "doing") {
     lists.innerHTML = ""
     todos.forEach((todo,i) => {
       addHTML(todo, i)
