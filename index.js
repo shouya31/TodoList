@@ -3,7 +3,10 @@ const addTaskButton = document.getElementById("add-button")
 const lists = document.getElementById("lists")
 const todos = []
 
-let formValue = "all"
+const allRadio = document.getElementById("all-task")
+const doingRadio = document.getElementById("doing-task")
+const doneRadio = document.getElementById("done-task")
+let radioStatus = "all"
 
 // 表示させるタスクのHTML要素を作成する関数
 const addHTML = (todo, i) => {
@@ -42,27 +45,23 @@ const addHTML = (todo, i) => {
     changeStatus(statusButton, todo)
   })
 }
-
-// 選択されているラジオフォームのバリューを取得する関数
-const judgeRadioValue = (value) => {
-  formValue = value
-}
-
 // 作業中のステータスをもつタスクのみを表示する関数
 const changeDoingTask = () => {
-  lists.innerHTML = ""
-  todos.forEach((todo, i) => {
-    if (todo.status === "作業中") {
-      addHTML(todo, i)
-    }
-  })
+  radioStatus = "doing"
+  showEachTask("作業中")
 }
 
 // 完了のステータスをもつタスクのみを表示する関数
 const changeDoneTask = () => {
+  radioStatus = "done"
+  showEachTask("完了")
+}
+
+// 作業中or完了のタスクを表示する
+const showEachTask = (status) => {
   lists.innerHTML = ""
   todos.forEach((todo, i) => {
-    if (todo.status === "完了") {
+    if (todo.status === status) {
       addHTML(todo, i)
     }
   })
@@ -70,6 +69,7 @@ const changeDoneTask = () => {
 
 // ステータス関係なく、全てのタスクを表示する関数
 const changeAllTask = () => {
+  radioStatus = "all"
   lists.innerHTML = ""
   todos.forEach((todo, i) => {
     addHTML(todo, i)
@@ -84,11 +84,14 @@ const addTask = () => {
     status: "作業中"
   }
   todos.push(todo)
-  if (formValue === "all" || formValue === "doing") {
+  if (radioStatus === "all") {
     lists.innerHTML = ""
     todos.forEach((todo,i) => {
       addHTML(todo, i)
     });
+  }
+  else if ( radioStatus === "doing"){
+    showEachTask("作業中")
   }
   input.value = ""
 }
@@ -116,3 +119,6 @@ const changeStatus = (statusButton, todo) => {
 
 // 入力したタスクを表示する関数を呼び出すイベント
 addTaskButton.addEventListener('click', addTask)
+allRadio.addEventListener('change', changeAllTask)
+doingRadio.addEventListener('change', changeDoingTask)
+doneRadio.addEventListener('change', changeDoneTask)

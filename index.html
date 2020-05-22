@@ -8,9 +8,9 @@
   <body>
     <h1>TODOリスト</h1>
     <form id="radio-form">
-      <input name="status" type="radio" onclick="changeAllTask()" onchange="judgeRadioValue(this.value)" value="all" checked> すべて
-      <input name="status" type="radio" onclick="changeDoingTask()" onchange="judgeRadioValue(this.value)" value="doing"> 作業中
-      <input name="status" type="radio" onclick="changeDoneTask()" onchange="judgeRadioValue(this.value)" value="done"> 完了
+      <input name="status" type="radio" id="all-task" value="all" checked> すべて
+      <input name="status" type="radio" id="doing-task" value="doing"> 作業中
+      <input name="status" type="radio" id="done-task" value="done"> 完了
     </form>
 
     <table>
