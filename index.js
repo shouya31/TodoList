@@ -40,9 +40,9 @@ const addHTML = (todo, i) => {
     deleteTask(deleteButton, i)
   })
 
-  // 作業中orm完了ボタンを押した際に、ステータスを変更するchangeStatus関数を実行する
+  // 作業中orm完了ボタンを押した際に、ステータスを変更するchangeTasks関数を実行する
   statusButton.addEventListener('click', function(){
-    changeStatus(statusButton, todo)
+    changeTasks(statusButton, todo)
   })
 }
 
@@ -108,23 +108,25 @@ const deleteTask = (deleteButton, i) => {
 }
 
 // タスクのステータスを変更する
-const changeStatus = (statusButton, todo) => {
+const changeStatus = (todo, statusButton, status) => {
+  todo.status = status
+  statusButton.innerHTML = todo.status
+}
+
+// タスクのステータスに応じて、タスクを表示させる
+const changeTasks = (statusButton, todo) => {
   if (todo.status === '作業中' && radioStatus ===  'all') {
-    todo.status = '完了'
-    statusButton.innerHTML = todo.status
+    changeStatus(todo, statusButton, '完了')
   }
   else if(todo.status === '作業中' && radioStatus !==  'all'){
-    todo.status = '完了'
-    statusButton.innerHTML = todo.status
+    changeStatus(todo, statusButton, '完了')
     showEachTask('作業中')
   }
   else if(todo.status === '完了' && radioStatus ===  'all'){
-    todo.status = '作業中'
-    statusButton.innerHTML = todo.status
+    changeStatus(todo, statusButton, "作業中")
   }
   else if(todo.status === '完了' && radioStatus !==  'all'){
-    todo.status = '作業中'
-    statusButton.innerHTML = todo.status
+    changeStatus(todo, statusButton, "作業中")
     showEachTask('完了')
   }
 }
