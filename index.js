@@ -44,7 +44,7 @@ const addHTML = (todo, i) => {
   statusButton.addEventListener('click', function(){
     changeTasks(statusButton, todo)
   })
-}
+};
 
 // 作業中or完了のタスクを表示する
 const showEachTask = (status) => {
@@ -54,19 +54,19 @@ const showEachTask = (status) => {
       addHTML(todo, i)
     }
   })
-}
+};
 
 // 作業中のステータスをもつタスクのみを表示する関数
 const changeDoingTask = (event) => {
   radioStatus = event.target.value
   showEachTask('作業中')
-}
+};
 
 // 完了のステータスをもつタスクのみを表示する関数
 const changeDoneTask = (event) => {
   radioStatus = event.target.value
   showEachTask('完了')
-}
+};
 
 // ステータス関係なく、全てのタスクを表示する関数
 const changeAllTask = (event) => {
@@ -75,7 +75,7 @@ const changeAllTask = (event) => {
   todos.forEach((todo, i) => {
     addHTML(todo, i)
   })
-}
+};
 
 // 入力したタスクを表示させる関数
 const addTask = () => {
@@ -95,21 +95,20 @@ const addTask = () => {
     showEachTask('作業中')
   }
   input.value = ''
-}
+};
 
 // 入力したタスクを削除する関数
 const deleteTask = (deleteButton, i, status) => {
   deleteButton.parentNode.parentNode.remove()
   todos.splice(i, 1)
   showEachTask(status)
-
-}
+};
 
 // タスクのステータスを変更する
 const changeStatus = (todo, statusButton, status) => {
   todo.status = status
   statusButton.innerHTML = todo.status
-}
+};
 
 // タスクのステータスに応じて、タスクを表示させる
 const changeTasks = (statusButton, todo) => {
@@ -127,16 +126,16 @@ const changeTasks = (statusButton, todo) => {
     changeStatus(todo, statusButton, "作業中")
     showEachTask('完了')
   }
-}
+};
 
 // 入力したタスクを表示する関数を呼び出すイベント
 addTaskButton.addEventListener('click', addTask)
 allRadio.addEventListener('change', (event) => {
   changeAllTask(event)
-})
+});
 doingRadio.addEventListener('change', (event) => {
   changeDoingTask(event)
-})
+});
 doneRadio.addEventListener('change', (event) => {
   changeDoneTask(event)
-})
+});
