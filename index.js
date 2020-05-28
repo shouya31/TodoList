@@ -37,7 +37,7 @@ const addHTML = (todo, i) => {
 
   // 削除ボタンが押された際に、指定の要素を削除するdeleteTask関数を実行する
   deleteButton.addEventListener('click', function() {
-    deleteTask(deleteButton, i)
+    deleteTask(deleteButton, i, todo.status)
   })
 
   // 作業中orm完了ボタンを押した際に、ステータスを変更するchangeTasks関数を実行する
@@ -98,13 +98,11 @@ const addTask = () => {
 }
 
 // 入力したタスクを削除する関数
-const deleteTask = (deleteButton, i) => {
+const deleteTask = (deleteButton, i, status) => {
   deleteButton.parentNode.parentNode.remove()
   todos.splice(i, 1)
-  lists.innerHTML = ''
-  todos.forEach((todo, i) => {
-    addHTML(todo, i)
-  });
+  showEachTask(status)
+
 }
 
 // タスクのステータスを変更する
