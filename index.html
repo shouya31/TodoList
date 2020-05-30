@@ -7,9 +7,11 @@
   </head>
   <body>
     <h1>TODOリスト</h1>
-    <input type="radio" checked> すべて
-    <input type="radio"> 作業中
-    <input type="radio"> 完了
+    <form id="radio-form">
+      <input name="status" type="radio" id="all-task" value="all" checked> すべて
+      <input name="status" type="radio" id="doing-task" value="doing"> 作業中
+      <input name="status" type="radio" id="done-task" value="done"> 完了
+    </form>
 
     <table>
       <thead>
